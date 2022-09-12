@@ -232,45 +232,59 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                        <h5 class="card-title">Personal Calender</h5>
+                        <h5 class="card-title"></h5>
                         <div class="card">
                             <div class="">
                                 <div class="row">
                                     <div class="col-lg-3 border-right pe-0">
                                         <div class="card-body border-bottom">
-                                            <h4 class="card-title mt-2">Drag & Drop Event</h4>
+                                            <h4 class="card-title mt-2">Timeline</h4>
                                         </div>
+                                        <?php
+                                            $user_id = $_SESSION['id'];
+
+                                            $sqly = "SELECT * FROM orders  WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
+                                            $resulty = $connection->query($sqly);
+
+                                            if ($resulty->num_rows > 0) {
+                                                // output data of each row
+
+                                            ?>
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div id="calendar-events" class="">
-                                                        <div class="calendar-events mb-3" data-class="bg-info"><i
-                                                                class="fa fa-circle text-info me-2"></i>Meeting
-                                                        </div>
-                                                        <div class="calendar-events mb-3" data-class="bg-success"><i
-                                                                class="fa fa-circle text-success me-2"></i>Birthday
-                                                        </div>
-                                                        <div class="calendar-events mb-3" data-class="bg-danger"><i
-                                                                class="fa fa-circle text-danger me-2"></i>Event
-                                                        </div>
-                                                        <div class="calendar-events mb-3" data-class="bg-warning"><i
-                                                                class="fa fa-circle text-warning me-2"></i>Thanksgiving
-                                                        </div>
-                                                    </div>
-                                                    <!-- checkbox -->
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input"
-                                                            id="drop-remove">
-                                                        <label class="form-check-label" for="drop-remove">Remove
-                                                            after drop</label>
-                                                    </div>
+                                                <?php while ($row = $resulty->fetch_assoc()) {  ?>
+                                                    <p>Status: <?php echo $row["status"] ?></p>
                                                     <a href="javascript:void(0)" data-toggle="modal"
                                                         data-target="#add-new-event"
                                                         class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <i class="ti-plus"></i> Add New Event
+                                                        <h3><?php echo $row["amount"] ?></h3>
+                                                        <i class=""></i>Investment
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-toggle="modal"
+                                                        data-target="#add-new-event"
+                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
+                                                        <h3><?php echo $row["roi"] ?></h3>
+                                                        <i class=""></i>R.O.I
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-toggle="modal"
+                                                        data-target="#add-new-event"
+                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
+                                                        <i class="ti-plus"></i>     Bonus (<?php echo $row["bonus"] ?>)
+                                                    </a>
+                                                    <a href="javascript:void(0)" data-toggle="modal"
+                                                        data-target="#add-new-event"
+                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
+                                                        <i class=""></i> Billing days =  (<?php echo $row["billing_days"] ?>)
                                                     </a>
                                                 </div>
                                             </div>
+                                            <?php
+                                                }
+                                                    } else {
+                                                    echo "No Recent Orders";
+                                                }
+                                        ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
@@ -298,7 +312,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-0">Current Order</h5>
+                                <h5 class="card-title mb-0">Recent activities</h5>
                             </div>
                             <table class="table">
                                 <thead>

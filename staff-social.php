@@ -7,21 +7,28 @@
 if (isset($_POST['social-btn'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
-            
-    $sql = "INSERT INTO social_details(instagram_username, instagram_password) VALUES('{$name}', '{$password}')";
+    $confirm_password = $_POST['confirm_password'];
+    $user_id = $_SESSION['id'];
 
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        $hey = "Success";
-    } else { 
-        header('location: staff-social.php');
+    if ($confirm_password == $password) {
+        $sql = "INSERT INTO social_details(instagram_username, instagram_password, user_id) VALUES('{$name}', '{$password}','{$user_id}')";
+
+        $result = mysqli_query($connection, $sql);
+        if ($result) {
+            $hey = "Success";
+        } else {
+            header('location: staff-social.php');
+        }
+    } else {
+        $incorrect = "password doesn't match";
     }
 }
 
-?> 
+?>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -54,15 +61,14 @@ if (isset($_POST['social-btn'])) {
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <header class="topbar" data-navbarbg="skin5">
             <nav class="navbar top-navbar navbar-expand-md navbar-dark">
                 <div class="navbar-header" data-logobg="skin5">
-                    
+
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
@@ -95,8 +101,7 @@ if (isset($_POST['social-btn'])) {
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
-                            class="ti-menu ti-close"></i></a>
+                    <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -106,18 +111,14 @@ if (isset($_POST['social-btn'])) {
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-start me-auto">
-                        <li class="nav-item d-none d-lg-block"><a
-                                class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
-                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
                         <!-- ============================================================== -->
-                        
+
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="ti-search"></i></a>
+                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
                             <form class="app-search position-absolute">
-                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
-                                    class="srh-btn"><i class="ti-close"></i></a>
+                                <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                             </form>
                         </li>
                     </ul>
@@ -126,11 +127,11 @@ if (isset($_POST['social-btn'])) {
                     <!-- ============================================================== -->
                     <ul class="navbar-nav float-end">
                         <!-- ============================================================== -->
-                        
+
                         <!-- ============================================================== -->
                         <!-- End Comment -->
                         <!-- ============================================================== -->
-                                                <!-- ============================================================== -->
+                        <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
@@ -141,14 +142,11 @@ if (isset($_POST['social-btn'])) {
                                 <a class="dropdown-item" href="staff-profile.php"><i class="ti-user me-1 ms-1"></i>
                                     My Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="staff-task.php"><i
-                                        class="fas fa-file-alt me-1 ms-1"></i> Task</a>
+                                <a class="dropdown-item" href="staff-task.php"><i class="fas fa-file-alt me-1 ms-1"></i> Task</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="staff-social.php"><i
-                                        class="fas fa-user-plus me-1 ms-1"></i> Connect Social</a>
+                                <a class="dropdown-item" href="staff-social.php"><i class="fas fa-user-plus me-1 ms-1"></i> Connect Social</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php"><i
-                                        class="fa fa-power-off me-1 ms-1"></i> Logout</a>
+                                <a class="dropdown-item" href="logout.php"><i class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
                             </ul>
                         </li>
@@ -171,19 +169,11 @@ if (isset($_POST['social-btn'])) {
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-profile.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Profile</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-social.php" aria-expanded="false"><i class="fas fa-user-plus"></i><span
-                                    class="hide-menu">Connect Socials</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-task.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
-                                    class="hide-menu">Task</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
-                                    class="hide-menu">Logout</span></a></li>
-                    </nav>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="staff-profile.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Profile</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="staff-social.php" aria-expanded="false"><i class="fas fa-user-plus"></i><span class="hide-menu">Connect Socials</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="staff-task.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Task</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Logout</span></a></li>
+                </nav>
                 <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -223,7 +213,9 @@ if (isset($_POST['social-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-cyan text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                               <a href="staff-profile.php"> <h6 class="text-white">Profile</h6></a>
+                                <a href="staff-profile.php">
+                                    <h6 class="text-white">Profile</h6>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -232,7 +224,9 @@ if (isset($_POST['social-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-success text-center">
                                 <h1 class="font-light text-white"><i class="fas fa-user-plus"></i></h1>
-                               <a href="staff-social.php"><h6 class="text-white">Connect Socials</h6> </a>
+                                <a href="staff-social.php">
+                                    <h6 class="text-white">Connect Socials</h6>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -241,7 +235,9 @@ if (isset($_POST['social-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                                <a href="staff-task.php"><h6 class="text-white">Task</h6></a>
+                                <a href="staff-task.php">
+                                    <h6 class="text-white">Task</h6>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -250,57 +246,76 @@ if (isset($_POST['social-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-danger text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
-                                <a href="logout.php"><h6 class="text-white">Logout</h6></a>
+                                <a href="logout.php">
+                                    <h6 class="text-white">Logout</h6>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <?php
-                        if (isset($hey)) {
-                            
-                ?>     
-                            <div class="alert alert-danger" role="alert">
-                                    <h4 class="alert-heading">Good job!</h4>
-                                    <p>Your account is being verified, kindly check back in a few days. </p>
-                             </div>
+                if (isset($hey)) {
+
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Good job!</h4>
+                        <p>Your account is being verified, you will be notofied via email if we require any additional information. </p>
+                    </div>
                 <?php } ?>
                 <div class="card">
-                            <div class="card-body border-top">
-                                <h5 class="card-title">Connect your Instagram account <span class="fab fa-instagram"></span></h5>
-                                <div class="alert alert-success" role="alert">
-                                    <h4 class="alert-heading">Well done!</h4>
-                                    <p>For staff verification and authentication, you will have to complete your profile by integrating you social media account to your Environ Platform account.
-                                        We use this to verify and track your tasks submitted to the admin.
-                                        You will verify this process by connecting your Environ staff account with your Instagram account <span class="fab fa-instagram"></span>
-                                    </p>
-                                    <hr>
-                                    <p class="mb-0">Note: All information shared is safe and secure in the company database and on no occassion will it it shared or sold to a third party.</p>
+                    <div class="card-body border-top">
+                        <h5 class="card-title">Connect your Instagram account <span class="fab fa-instagram"></span></h5>
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Well done!</h4>
+                            <p>For staff verification and authentication, you will have to complete your profile by integrating you social media account to your Environ Platform account.
+                                We use this to verify and track your tasks submitted to the admin.
+                                You will verify this process by connecting your Environ staff account with your Instagram account <span class="fab fa-instagram"></span>
+                            </p>
+                            <hr>
+                            <p class="mb-0">Note: All information shared is safe and secure in the company database and on no occassion will it it shared or sold to a third party.</p>
+                        </div>
+                        <?php
+                        if (isset($incorrect)) {
+
+                        ?>
+                            <div class="alert alert-danger" role="alert">
+                                <h4 class="alert-heading">Error job!</h4>
+                                <p>Password doesn't match. </p>
+                            </div>
+                        <?php } ?>
+                        
+                        <form class="form-horizontal" method="POST" action="#">
+                            <div class="card-body">
+
+                                <div class="form-group row">
+                                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">Username</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="fname" name="name" placeholder="username" required>
+                                    </div>
                                 </div>
-                            <form class="form-horizontal" method="POST" action="#">
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="fname"
-                                            class="col-sm-3 text-end control-label col-form-label">Username</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="fname" name="name" placeholder="username" required >
-                                        </div>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="lname" name="password" placeholder="password" required>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Passwword
-                                            </label>
-                                        <div class="col-sm-9">
-                                            <input type="password" class="form-control" id="lname" name="password" placeholder="password" required  >
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Confirm-Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="lname" name="confirm_password" placeholder="confirm password" required>
                                     </div>
+                                </div>
                                 <div class="border-top">
                                     <div class="card-body">
                                         <button type="submit" name="social-btn" class="btn btn-success">Connect</button>
                                     </div>
                                 </div>
-                            </form>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
+                </div>
 
             </div>
             <!-- ============================================================== -->
@@ -310,7 +325,7 @@ if (isset($_POST['social-btn'])) {
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-            &copy; 2022 | Environ Platform
+                &copy; 2022 | Environ Platform
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->

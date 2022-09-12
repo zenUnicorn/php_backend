@@ -1,25 +1,34 @@
 <?php include("connections/session.php"); ?>
 <?php include("connections/database.php"); ?>
-
 <?php
-//staff signup
 
-if (isset($_POST['task-btn'])) {
-    $user_id = $_SESSION['id'];
-    $staff_name = $_POST['staff_name'];
-    $staff_task = $_POST['task_link'];
-            
-    $sql = "INSERT INTO staff_tasks(user_id, name, task) VALUES('{$user_id}', '{$staff_name}' , '{$staff_task}')";
+if(isset($_POST['change-btn'])){
 
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        $hey = "Success";
-    } else { 
-        header('location: staff-social.php');
+    $id = $_SESSION['id'];
+    $former_password = $_POST['former_password'];
+    $new_password = $_POST['new_password']; 
+
+    $select_query = "SELECT * FROM staff_table";
+    $run_select_query = mysqli_query($connection,$select_query); 
+    while ($row_post=mysqli_fetch_array($run_select_query)){
+
+        $row_post['id'] = $_SESSION['id']; 
+        $user_id = $_SESSION['id'];
+        $password = $row_post['password'];
+
+            if($former_password == $password AND $id == $user_id){
+                $updatepassword = "UPDATE staff_table SET password = '$new_password' WHERE id= '$user_id'";
+                $run_update = mysqli_query($connection,$updatepassword);
+                if ($run_update == True) {
+                    echo "<script>alert('Password Has been Updated!')</script>";
+                } else {
+                    echo "<script>alert('Please try again!')</script>";
+                }
+            }
     }
 }
+?>
 
-?> 
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -55,7 +64,8 @@ if (isset($_POST['task-btn'])) {
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+    <div id="main-wrapper" data-layout="verti
+    cal" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
@@ -256,49 +266,37 @@ if (isset($_POST['task-btn'])) {
                         </div>
                     </div>
                 </div>
-                
-                <?php
-                        if (isset($hey)) {
-                            
-                ?>     
-                            <div class="alert alert-danger" role="alert">
-                                    <h4 class="alert-heading">Good job!</h4>
-                                    <p>Your task has been submitted!</p>
-                             </div>
-                <?php } ?>
-                <div class="card">
-                            <div class="card-body border-top">
-                                <h5 class="card-title">Find/Submit task <span class="fas fa-tasks"></span></h5>
-                                <div class="alert alert-success" role="alert">
-                                    <p>All task assigned to all staff will be shared here and you can submit the links in the appropriate forms. <br>
-                                        Please make sure that all task are completed in the given time frame.
-
-                                    </p>
-                                </div>
-                            <form class="form-horizontal" method="POST" action="#">
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="fname"
-                                            class="col-sm-3 text-end control-label col-form-label">Staff Name</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="fname" name="staff_name" value="<?php echo $_SESSION['username'];?>" required >
-                                        </div>
+                        
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-0">Update password</h5>
+                                <form class="form-horizontal" method="POST" action="#">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">Former password</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="fname" name="former_password" placeholder="Former password" required>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="cono1"
-                                            class="col-sm-3 text-end control-label col-form-label">Links to task</label>
-                                        <div class="col-sm-9">
-                                            <textarea class="form-control" name="task_link"></textarea>
-                                        </div>
+                                </div> 
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">New Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="lname" name="new_password" placeholder="New Password" required>
                                     </div>
+                                
                                 <div class="border-top">
                                     <div class="card-body">
-                                        <button type="submit" name="task-btn" class="btn btn-success">Submit</button>
+                                        <button type="submit" name="change-btn" class="btn btn-success">Update</button>
                                     </div>
                                 </div>
-                            </form>
+                        </form>
                             </div>
                         </div>
+                    </div>
+                </div>
 
             </div>
             <!-- ============================================================== -->

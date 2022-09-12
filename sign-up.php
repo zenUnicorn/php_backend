@@ -124,6 +124,7 @@ if (isset($_POST['register_button'])) {
                     </div>
                     <button type="submit" name="register_button" id="sign_in" class="btn btn-outline-primary btn-lg btn-block">Sign
                         Up</button>
+                    <p>Already have an account? <a href="sign-in.php">Sign in</a></p>
                 </form>
             </div>
         </div>
@@ -136,7 +137,7 @@ if (isset($_POST['register_button'])) {
         <div class="social-link">
 
             <ul class="list-inline tt-animate btt" style="color: #000000">
-                <li>Address: 6222, Wilshire Blvd Ste 304 Los Angeles, CA 90048.</li>
+                <li>Address: 3435 Wilshire Blvd., Los Angeles, CA, 90010.</li>
                 <li>Email: support@environplatform.io</li>
                 <!-- <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li class="pinterest"><a href="#"><i class="fa fa-chart-area"></i></a></li> -->

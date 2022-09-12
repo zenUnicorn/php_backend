@@ -51,9 +51,8 @@
                       $_SESSION['user_password'] = $user_password;
                       $_SESSION['time'] = $user_date;
                    } else {
-                       $emailPwdErr = '<div class="alert alert-danger">
-                               Either email or password is incorrect.
-                           </div>';
+                    
+                    echo"<script>Wrong username/password</script>";
                    }
            }
        }
@@ -149,6 +148,7 @@
                     <button type="submit" name="login_button" id="sign_in"
                         class="btn btn-outline-primary btn-lg btn-block">Sign
                         in</button>
+                    <p>Don't have an account? <a href="sign-up.php">Sign up</a></p>
                 </form>
             </div>
         </div>
@@ -161,7 +161,7 @@
         <div class="social-link">
 
             <ul class="list-inline tt-animate btt" style="color: #000000">
-                <li>Address: 6222, Wilshire Blvd Ste 304 Los Angeles, CA 90048.</li>
+                <li>Address: 3435 Wilshire Blvd., Los Angeles, CA, 90010.</li>
                 <li>Email: support@environplatform.io</li>
                 <!-- <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
                                 <li class="pinterest"><a href="#"><i class="fa fa-chart-area"></i></a></li> -->

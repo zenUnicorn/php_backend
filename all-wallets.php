@@ -1,25 +1,7 @@
 <?php include("connections/session.php"); ?>
 <?php include("connections/database.php"); ?>
 
-<?php
-//staff signup
 
-if (isset($_POST['task-btn'])) {
-    $user_id = $_SESSION['id'];
-    $staff_name = $_POST['staff_name'];
-    $staff_task = $_POST['task_link'];
-            
-    $sql = "INSERT INTO staff_tasks(user_id, name, task) VALUES('{$user_id}', '{$staff_name}' , '{$staff_task}')";
-
-    $result = mysqli_query($connection, $sql);
-    if ($result) {
-        $hey = "Success";
-    } else { 
-        header('location: staff-social.php');
-    }
-}
-
-?> 
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -31,7 +13,7 @@ if (isset($_POST['task-btn'])) {
     <meta name="keywords">
     <meta name="description">
     <meta name="robots" content="noindex,nofollow">
-    <title>Environ Platform | Staff Social</title>
+    <title>Environ Platform | User Dashboard</title>
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="wp-content/themes/creptaam/images/logo-icon.png" type="image/x-icon">
     <!-- Custom CSS -->
@@ -67,7 +49,7 @@ if (isset($_POST['task-btn'])) {
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="staff-dashboard.php">
+                    <a class="navbar-brand" href="admin-dashboard.php">
                         <!-- Logo icon -->
                         <b class="logo-icon ps-2">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -139,18 +121,27 @@ if (isset($_POST['task-btn'])) {
                                 <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="staff-profile.php"><i class="ti-user me-1 ms-1"></i>
-                                    My Profile</a>
+                                <a class="dropdown-item" href="all-user.php"><i class="ti-user me-1 ms-1"></i>
+                                    All users</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="staff-task.php"><i
-                                        class="fas fa-file-alt me-1 ms-1"></i> Task</a>
+                                <a class="dropdown-item" href="all-staff.php"><i class="ti-user me-1 ms-1"></i>
+                                    All staff</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="staff-social.php"><i
-                                        class="fas fa-user-plus me-1 ms-1"></i> Connect Social</a>
+                                <a class="dropdown-item" href="all-orders.php"><i class="ti-user me-1 ms-1"></i>
+                                    All orders</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="all-task.php"><i class="ti-user me-1 ms-1"></i>
+                                    All task</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="all-details.php"><i class="ti-user me-1 ms-1"></i>
+                                    All details</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="all-wallets.php"><i class="ti-user me-1 ms-1"></i>
+                                    All wallets</a>
                                 <a class="dropdown-item" href="logout.php"><i
                                         class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
+                                
                             </ul>
                         </li>
                         <!-- ============================================================== -->
@@ -173,14 +164,23 @@ if (isset($_POST['task-btn'])) {
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="pt-4">
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-profile.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Profile</span></a></li>
+                                href="all-user.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                    class="hide-menu">All users</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-social.php" aria-expanded="false"><i class="fas fa-user-plus"></i><span
-                                    class="hide-menu">Connect Socials</span></a></li>
+                                href="all-staff.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
+                                    class="hide-menu">All Staffs</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="staff-task.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
-                                    class="hide-menu">Task</span></a></li>
+                                href="all-orders.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span
+                                    class="hide-menu">All orders</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="all-task.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                    class="hide-menu">All task</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="all-details.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
+                                    class="hide-menu">All details</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="all-wallets.php" aria-expanded="false"><i class="mdi mdi-link"></i><span
+                                    class="hide-menu">All Wallets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -202,7 +202,7 @@ if (isset($_POST['task-btn'])) {
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Hello, <?php echo $_SESSION['username']; ?>!</h4>
+                        <h4 class="page-title">Hello, <?php echo $_SESSION['admin_username']; ?>!</h4>
                         <div class="ms-auto text-end">
                         </div>
                     </div>
@@ -224,7 +224,7 @@ if (isset($_POST['task-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-cyan text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                               <a href="staff-profile.php"> <h6 class="text-white">Profile</h6></a>
+                               <a href="all-user.php"> <h6 class="text-white">All users</h6></a>
                             </div>
                         </div>
                     </div>
@@ -232,8 +232,8 @@ if (isset($_POST['task-btn'])) {
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">
                             <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"><i class="fas fa-user-plus"></i></h1>
-                               <a href="staff-social.php"><h6 class="text-white">Connect Socials</h6> </a>
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                               <a href="all-staff.php"><h6 class="text-white">All staffs</h6> </a>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,33 @@ if (isset($_POST['task-btn'])) {
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                                <a href="staff-task.php"><h6 class="text-white">Task</h6></a>
+                                <a href="all-orders.php"><h6 class="text-white">All orders</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                               <a href="all-task.php"> <h6 class="text-white">All task</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <a href="all-details.php"><h6 class="text-white">All details</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-link"></i></h1>
+                               <a href="all-wallets.php"><h6 class="text-white">All wallets</h6> </a>
                             </div>
                         </div>
                     </div>
@@ -256,49 +282,68 @@ if (isset($_POST['task-btn'])) {
                         </div>
                     </div>
                 </div>
-                
-                <?php
-                        if (isset($hey)) {
-                            
-                ?>     
-                            <div class="alert alert-danger" role="alert">
-                                    <h4 class="alert-heading">Good job!</h4>
-                                    <p>Your task has been submitted!</p>
-                             </div>
-                <?php } ?>
-                <div class="card">
-                            <div class="card-body border-top">
-                                <h5 class="card-title">Find/Submit task <span class="fas fa-tasks"></span></h5>
-                                <div class="alert alert-success" role="alert">
-                                    <p>All task assigned to all staff will be shared here and you can submit the links in the appropriate forms. <br>
-                                        Please make sure that all task are completed in the given time frame.
 
-                                    </p>
+                <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <?php
+                        
+                        $sqli = "SELECT * FROM wallets ";
+                        $resulti = $connection->query($sqli);
+
+                        if ($resulti->num_rows > 0) {
+                            // output data of each row
+
+                ?>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="add-new-wallet.php" class="btn btn-primary">Add new wallet</a></h5>
+                                <div class="table-responsive">
+                                    <table id="zero_config" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Wallet name</th>
+                                                <th>Created by address</th>
+                                                <th>Time/Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                            <?php while ($row = $resulti->fetch_assoc()) {  ?>
+                                                <td><?php echo $row["id"] ?></td>
+                                                <td><?php echo $row["wallet"] ?></td>
+                                                <td><?php echo $row["created_by"] ?></td>
+                                                <td><?php echo $row["date_created"] ?></td>
+                                            </tr>
+                            <?php
+                                }
+                                    } else {
+                                        echo "No records";
+                                    }
+                            ?>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Wallet name</th>
+                                                <th>Created by address</th>
+                                                <th>Time/Date</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
-                            <form class="form-horizontal" method="POST" action="#">
-                                <div class="card-body">
-                                    <div class="form-group row">
-                                        <label for="fname"
-                                            class="col-sm-3 text-end control-label col-form-label">Staff Name</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="fname" name="staff_name" value="<?php echo $_SESSION['username'];?>" required >
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="cono1"
-                                            class="col-sm-3 text-end control-label col-form-label">Links to task</label>
-                                        <div class="col-sm-9">
-                                            <textarea class="form-control" name="task_link"></textarea>
-                                        </div>
-                                    </div>
-                                <div class="border-top">
-                                    <div class="card-body">
-                                        <button type="submit" name="task-btn" class="btn btn-success">Submit</button>
-                                    </div>
-                                </div>
-                            </form>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                
+
+                
 
             </div>
             <!-- ============================================================== -->
@@ -342,6 +387,18 @@ if (isset($_POST['task-btn'])) {
     <script src="assets/libs/moment/min/moment.min.js"></script>
     <script src="assets/libs/fullcalendar/dist/fullcalendar.min.js"></script>
     <script src="dist/js/pages/calendar/cal-init.js"></script>
+
+    <!-- this page js -->
+    <script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
+    <script src="assets/extra-libs/multicheck/jquery.multicheck.js"></script>
+    <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script>
+        /****************************************
+         *       Basic Table                   *
+         ****************************************/
+        $('#zero_config').DataTable();
+    </script>
+
 
 </body>
 

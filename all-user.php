@@ -2,6 +2,7 @@
 <?php include("connections/database.php"); ?>
 
 
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -135,9 +136,12 @@
                                 <a class="dropdown-item" href="all-details.php"><i class="ti-user me-1 ms-1"></i>
                                     All details</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="all-wallets.php"><i class="ti-user me-1 ms-1"></i>
+                                    All wallets</a>
                                 <a class="dropdown-item" href="logout.php"><i
                                         class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
+                                
                             </ul>
                         </li>
                         <!-- ============================================================== -->
@@ -174,6 +178,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="all-details.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">All details</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="all-wallets.php" aria-expanded="false"><i class="mdi mdi-link"></i><span
+                                    class="hide-menu">All Wallets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -253,6 +260,15 @@
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
                                 <a href="all-details.php"><h6 class="text-white">All details</h6></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-link"></i></h1>
+                               <a href="all-wallets.php"><h6 class="text-white">All wallets</h6> </a>
                             </div>
                         </div>
                     </div>

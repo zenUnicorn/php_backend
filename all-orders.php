@@ -2,6 +2,7 @@
 <?php include("connections/database.php"); ?>
 
 
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 <head>
@@ -135,9 +136,12 @@
                                 <a class="dropdown-item" href="all-details.php"><i class="ti-user me-1 ms-1"></i>
                                     All details</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="all-wallets.php"><i class="ti-user me-1 ms-1"></i>
+                                    All wallets</a>
                                 <a class="dropdown-item" href="logout.php"><i
                                         class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
+                                
                             </ul>
                         </li>
                         <!-- ============================================================== -->
@@ -174,6 +178,9 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="all-details.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">All details</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="all-wallets.php" aria-expanded="false"><i class="mdi mdi-link"></i><span
+                                    class="hide-menu">All Wallets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -259,6 +266,15 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-link"></i></h1>
+                               <a href="all-wallets.php"><h6 class="text-white">All wallets</h6> </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
                             <div class="box bg-danger text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
                                 <a href="logout.php"><h6 class="text-white">Logout</h6></a>
@@ -295,6 +311,9 @@
                                                 <th>Name</th>
                                                 <th>Package</th>
                                                 <th>Billing days</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                                <th>Status</th>
                                                 <th>Time/Date</th>
                                             </tr>
                                         </thead>
@@ -307,6 +326,9 @@
                                                 <td><?php echo $row["name"] ?></td>
                                                 <td><?php echo $row["package"] ?></td>
                                                 <td><?php echo $row["billing_days"] ?></td>
+                                                <td><a href="edit-order.php?id=<?= $row["id"]?>" class="btn btn-success" style="color: #fff;">Edit</a></td>
+                                                <td><a href="delete-order.php?id=<?= $row["id"]?>" class="btn btn-danger" style="color: #fff;">Delete</a></td>
+                                                <td><?php echo $row["status"] ?></td>
                                                 <td><?php echo $row["order_time"] ?></td>
                                             </tr>
                             <?php

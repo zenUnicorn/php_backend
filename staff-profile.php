@@ -237,25 +237,7 @@
                         </div>
                     </div>
                 </div>
-                        <!-- card -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Complete your profile</h4>
-                                <div class="col-md-12">
-                                    <div class="d-flex no-block align-items-center">
-                                        <span>75% done</span>
-                                        <div class="ms-auto">
-                                            <span>100%</span>
-                                        </div>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-                                            style="width: 75%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -301,12 +283,12 @@
                                             <span class="badge bg-success">Password</span>
                                         </td>
                                         <td>
-                                        <?php echo  $_SESSION['password']; ?>
+                                            ******** &nbsp; <a href="change-password.php">Change Password</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="badge bg-danger">Time joined</span>
+                                            <span class="badge bg-danger">Date/Time joined</span>
                                         </td>
                                         <td>
                                         <?php echo  $_SESSION['time']; ?>

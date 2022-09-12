@@ -289,12 +289,12 @@ if (isset($_POST['order'])) {
                                             <span class="badge bg-success">Password</span>
                                         </td>
                                         <td>
-                                        <?php echo  $_SESSION['user_password']; ?>
+                                            ******** &nbsp; <a href="update-password.php">Change Password</a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span class="badge bg-danger">Time joined</span>
+                                            <span class="badge bg-danger">Date/Time joined</span>
                                         </td>
                                         <td>
                                         <?php echo  $_SESSION['time']; ?>

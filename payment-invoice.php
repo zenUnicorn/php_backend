@@ -205,9 +205,9 @@
                                     <div class="pull-left">
                                         <address>
                                             <h3> &nbsp;<b class="text-danger">Environ Platform</b></h3>
-                                            <p class="text-muted ms-1">6222, Wilshire Blvd Ste 304 Los Angeles,
-                                                <br /> CA 90048.
-                                                <br /> (509) 542 - 7920.</p>
+                                            <p class="text-muted ms-1">3435 Wilshire Blvd., Los Angeles,
+                                                <br /> CA, 90010.
+                                                <br /> +1 (530) 389 - 0789.</p>
                                         </address>
                                     </div>
                                     <div class="pull-right text-end">

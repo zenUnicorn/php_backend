@@ -11,10 +11,11 @@ if (isset($_POST['order'])) {
     $name = $_POST['name'];
     $wallet_address = $_POST['wallet_address'];
     $package = $_POST['package'];
+    $amount = $_POST['amount'];
     $billing_days = $_POST['billing_days'];
 
 
-    $sql = "INSERT INTO orders (user_id, account_id, name, wallet_address, package, billing_days) VALUES('{$user_id}', '{$account_id}', '{$name}', '{$wallet_address}', '{$package}', '{$billing_days}')";
+    $sql = "INSERT INTO orders (user_id, account_id, name, wallet_address, package, amount, billing_days) VALUES('{$user_id}', '{$account_id}', '{$name}', '{$wallet_address}', '{$package}', '${amount}', '{$billing_days}')";
     $result = mysqli_query($connection, $sql);
     if ($result) {
         header('location: payment-invoice.php');
@@ -28,6 +29,7 @@ if (isset($_POST['order'])) {
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,7 +46,7 @@ if (isset($_POST['order'])) {
     <link href="assets/extra-libs/calendar/calendar.css" rel="stylesheet" />
     <link href="dist/css/style.min.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <![endif]-->
 </head>
 
 <body>
@@ -281,13 +283,29 @@ if (isset($_POST['order'])) {
                                             name="account_id" value="EVP20220<?php echo $_SESSION['id']; ?>" >
                                         </div>
                                     </div>
+
+                                    <?php
+                                    //diffrent wallets fetch from database
+                                            $wallet_query = "SELECT * FROM wallets ORDER BY id DESC LIMIT 1";
+                                            $wallet_query_run = $connection->query($wallet_query);
+
+                                            if ($wallet_query_run->num_rows > 0) {
+                                                // output data of each row
+
+                                    ?>
+                                     <?php while ($row = $wallet_query_run->fetch_assoc()) {  ?>
                                     <div class="form-group row">
                                         <label for="lname"
                                             class="col-sm-3 text-end control-label col-form-label">Crypto Address</label>
                                         <div class="col-sm-9">
-                                            <input type="text" name="wallet_address" value="1NDFRoAAtAzy2jNA1XZNGwXvTPGAV8e4wN" class="form-control" id="lname"
-                                                >
+                                            <input type="text" name="wallet_address" value="<?php echo $row["wallet"] ?>" class="form-control" id="lname">
                                         </div>
+                                            <?php
+                                                }
+                                                    } else {
+                                                    echo "No Recent Orders";
+                                                }
+                                        ?>
                                     </div>
                                     <div class="form-group row">
                                         <label for="email1" class="col-sm-3 text-end control-label col-form-label">Package</label>
@@ -295,39 +313,38 @@ if (isset($_POST['order'])) {
                                         <div class="col-sm-9">
                                         <select class="form-control" name="package">
                                         <option>Default select</option>
-                                        <option value="STARTER(90 Days)    $100">STARTER(90 Days) $100</option>
-                                        <option value="ECONOMY(90 Days)    $250">ECONOMY(90 Days) $250</option>
-                                        <option value="ADVANCED(90 Days)    $400">ADVANCED(90 Days) $400</option>
-                                        <option value="PROFESSIONAL(90 Days)    $700">PROFESSIONAL(90 Days) $700</option>
-                                        <option value="INVESTOR(90 Days)    $1,000">INVESTOR(90 Days) $1,000</option>
-                                        <option value="PLATINUM(90 Days)    $2,500">PLATINUM(90 Days) $2,500</option>
-
-                                        <option value="STARTER(180 Days)    $200">STARTER(180 Days) $200</option>
-                                        <option value="ECONOMY(180 Days)    $450">ECONOMY(180 Days) $450</option>
-                                        <option value="ADVANCED(180 Days)    $600">ADVANCED(180 Days) $600</option>
-                                        <option value="PROFESSIONAL(180 Days)    $1,500">PROFESSIONAL(180 Days) $1,500</option>
-                                        <option value="INVESTOR(180 Days)    $3,000">INVESTOR(180 Days) $3,000</option>
-                                        <option value="PLATINUM(180 Days)    $6,000">PLATINUM(180 Days) $6,000</option>
-
-                                        <option value="STARTER(360 Days)    $300">STARTER(360 Days) $300</option>
-                                        <option value="ECONOMY(360 Days)    $1,000">ECONOMY(360 Days) $1,000</option>
-                                        <option value="ADVANCED(360 Days)    $2,500">ADVANCED(360 Days) $2,500</option>
-                                        <option value="PROFESSIONAL(360 Days)    $5,000">PROFESSIONAL(360 Days) $5,000</option>
-                                        <option value="INVESTOR(360 Days)    $10,000">INVESTOR(360 Days) $10,000</option>
-                                        <option value="PLATINUM(360 Days)    $25,000">PLATINUM(360 Days) $25,000</option>
-
+                                        <option value="Basic Plan">Basic Plan</option>
+                                        <option value="Deluxe Plan">Deluxe Plan</option>
+                                        <option value="Super Deluxe Plan">Super Deluxe Plan</option>
+                                        <option value="Executive Plan">Executive Plan</option>
                                     </select>
                                         </div>
                                     </div>
+
+                                    <div class="form-group row">
+                                        <label for="email1" class="col-sm-3 text-end control-label col-form-label">Amount</label>
+
+                                        <div class="col-sm-9">
+                                        <select class="form-control" name="amount">
+                                        <option>Default select</option>
+                                        <option value="$500">$500</option>
+                                        <option value="$1,000">$1,000</option>
+                                        <option value="$3,500">$3,500</option>
+                                        <option value="$7,500">$7,500</option>
+                                    </select>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="form-group row">
                                         <label for="cono1"
                                             class="col-sm-3 text-end control-label col-form-label">Billing Days</label>
                                         <div class="col-sm-9">
                                         <select class="form-control" name="billing_days">
                                             <option>Default select</option>
-                                            <option value="90">90</option>
-                                            <option value="180">180</option>
-                                            <option value="360">360</option>
+                                            <option value="7">7 days</option>
+                                            <option value="14">14 days</option>
+                                            <option value="28">28 days</option>
+                                            <option value="41">41 days</option>
                                         </select>
                                         </div>
                                     </div>
@@ -343,14 +360,14 @@ if (isset($_POST['order'])) {
                 </div>
 
                 <?php
-                        $user_id = $_SESSION['id'];
+                $user_id = $_SESSION['id'];
 
-                        //$sqli = "SELECT * FROM orders WHERE user_id = $user_id LIMIT 2";
-                        $sqli = "SELECT * FROM orders  WHERE user_id = $user_id ORDER BY id DESC LIMIT 2";
-                        $resulti = $connection->query($sqli);
+                //$sqli = "SELECT * FROM orders WHERE user_id = $user_id LIMIT 2";
+                $sqli = "SELECT * FROM orders  WHERE user_id = $user_id ORDER BY id DESC LIMIT 2";
+                $resulti = $connection->query($sqli);
 
-                        if ($resulti->num_rows > 0) {
-                            // output data of each row
+                if ($resulti->num_rows > 0) {
+                    // output data of each row
 
                 ?>
 
@@ -380,11 +397,11 @@ if (isset($_POST['order'])) {
                                         <td><?php echo $row["order_time"] ?></td>
                                     </tr>
                         <?php
-                                }
-                                    } else {
-                                        echo "No Recent Orders";
                                     }
-                            ?>
+                                } else {
+                                    echo "No Recent Orders";
+                                }
+                        ?>
                                 </tbody>
                             </table>
         
