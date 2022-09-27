@@ -273,6 +273,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                               <a href="all-withdrawal.php"> <h6 class="text-white">All withdrawals</h6></a>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">

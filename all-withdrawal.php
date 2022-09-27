@@ -297,7 +297,7 @@
                 <!-- ============================================================== -->
                 <?php
                         
-                        $sqli = "SELECT * FROM orders";
+                        $sqli = "SELECT * FROM withdrawal_table";
                         $resulti = $connection->query($sqli);
 
                         if ($resulti->num_rows > 0) {
@@ -314,30 +314,33 @@
                                         <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th>User-Id</th>
                                                 <th>Account-Id</th>
-                                                <th>Name</th>
+                                                <th hidden>User-Id</th>
                                                 <th>Package</th>
-                                                <th>Billing days</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
-                                                <th>Status</th>
-                                                <th>Time/Date</th>
+                                                <th>R.O.I</th>
+                                                <th>Bonus</th>
+                                                <th>Total amount</th>
+                                                
+                                                <th hidden>Edit</th>
+                                                <th >Delete</th>
+                                                <th>Wallet Address</th>
+                                                <th>Date/Time</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                             <?php while ($row = $resulti->fetch_assoc()) {  ?>
                                                 <td><?php echo $row["id"] ?></td>
-                                                <td><?php echo $row["user_id"] ?></td>
                                                 <td><?php echo $row["account_id"] ?></td>
-                                                <td><?php echo $row["name"] ?></td>
+                                                <td hidden><?php echo $row["user_id"] ?></td>
                                                 <td><?php echo $row["package"] ?></td>
-                                                <td><?php echo $row["billing_days"] ?></td>
-                                                <td><a href="edit-order.php?id=<?= $row["id"]?>" class="btn btn-success" style="color: #fff;">Edit</a></td>
-                                                <td><a href="delete-order.php?id=<?= $row["id"]?>" class="btn btn-danger" style="color: #fff;">Delete</a></td>
-                                                <td><?php echo $row["status"] ?></td>
-                                                <td><?php echo $row["order_time"] ?></td>
+                                                <td><?php echo $row["roi"] ?></td>
+                                                <td><?php echo $row["bonus"] ?></td>
+                                                <td><?php echo $row["total"] ?></td>
+                                                <td hidden><a href="edit-order.php?id=<?= $row["id"]?>" class="btn btn-success" style="color: #fff;">Edit</a></td>
+                                                <td><a href="delete-withdraw.php?id=<?= $row["id"]?>" class="btn btn-danger" style="color: #fff;">Delete</a></td>
+                                                <td><?php echo $row["wallet"] ?></td>
+                                                <td><?php echo $row["withdraw_time"] ?></td>
                                             </tr>
                             <?php
                                 }

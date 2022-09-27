@@ -1,6 +1,19 @@
 <?php include("connections/session.php"); ?>
 <?php include("connections/database.php"); ?>
 
+<?php 
+if (isset($_POST['update_withdrawal'])) {
+    $id = $_POST['id'];
+
+    $update_order = "DELETE FROM withdrawal_table WHERE id='$id'";
+    $update_order_run = mysqli_query($connection, $update_order);
+    if($update_order_run){
+        //echo "<script>alert('Update successful!')</script>";
+        header('location: all-withdrawal.php');
+        exit(0);
+    }
+}
+?>
 
 
 <!DOCTYPE html>
@@ -136,12 +149,9 @@
                                 <a class="dropdown-item" href="all-details.php"><i class="ti-user me-1 ms-1"></i>
                                     All details</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="all-wallets.php"><i class="ti-user me-1 ms-1"></i>
-                                    All wallets</a>
                                 <a class="dropdown-item" href="logout.php"><i
                                         class="fa fa-power-off me-1 ms-1"></i> Logout</a>
                                 <div class="dropdown-divider"></div>
-                                
                             </ul>
                         </li>
                         <!-- ============================================================== -->
@@ -178,9 +188,6 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="all-details.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">All details</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="all-wallets.php" aria-expanded="false"><i class="mdi mdi-link"></i><span
-                                    class="hide-menu">All Wallets</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="logout.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span
                                     class="hide-menu">Logout</span></a></li>
@@ -266,23 +273,6 @@
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">
-                            <div class="box bg-success text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-link"></i></h1>
-                               <a href="all-wallets.php"><h6 class="text-white">All wallets</h6> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-hover">
-                            <div class="box bg-cyan text-center">
-                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
-                               <a href="all-withdrawal.php"> <h6 class="text-white">All withdrawals</h6></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Column -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card card-hover">
                             <div class="box bg-danger text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-border-outside"></i></h1>
                                 <a href="logout.php"><h6 class="text-white">Logout</h6></a>
@@ -295,70 +285,71 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <?php
-                        
-                        $sqli = "SELECT * FROM orders";
-                        $resulti = $connection->query($sqli);
-
-                        if ($resulti->num_rows > 0) {
-                            // output data of each row
-
-                ?>
+                
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
-                                <div class="table-responsive">
-                                    <table id="zero_config" class="table table-striped table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>User-Id</th>
-                                                <th>Account-Id</th>
-                                                <th>Name</th>
-                                                <th>Package</th>
-                                                <th>Billing days</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
-                                                <th>Status</th>
-                                                <th>Time/Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                            <?php while ($row = $resulti->fetch_assoc()) {  ?>
-                                                <td><?php echo $row["id"] ?></td>
-                                                <td><?php echo $row["user_id"] ?></td>
-                                                <td><?php echo $row["account_id"] ?></td>
-                                                <td><?php echo $row["name"] ?></td>
-                                                <td><?php echo $row["package"] ?></td>
-                                                <td><?php echo $row["billing_days"] ?></td>
-                                                <td><a href="edit-order.php?id=<?= $row["id"]?>" class="btn btn-success" style="color: #fff;">Edit</a></td>
-                                                <td><a href="delete-order.php?id=<?= $row["id"]?>" class="btn btn-danger" style="color: #fff;">Delete</a></td>
-                                                <td><?php echo $row["status"] ?></td>
-                                                <td><?php echo $row["order_time"] ?></td>
-                                            </tr>
+                                
+                            <h5 class="card-title">Deleter Orders</h5>
                             <?php
-                                }
-                                    } else {
-                                        echo "No Orders!";
-                                    }
+                            if(isset($_GET['id']))
+                                {
+                                    $order_id = $_GET['id'];
+                                    $sqli = "SELECT * FROM withdrawal_table WHERE id='$order_id'";
+                                    $query = mysqli_query($connection, $sqli);
+
+                                    if (mysqli_num_rows($query) > 0) {
+                                        foreach($query as $order){
+
                             ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>User-Id</th>
-                                                <th>Account-Id</th>
-                                                <th>Name</th>
-                                                <th>Package</th>
-                                                <th>Billing days</th>
-                                                <th>Time/Date</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                <form action="#" method="POST">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Id</label>
+                                                <input type="text" name="id" value="<?=$order["id"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Acount ID</label>
+                                                <input type="text" name="name" value="<?=$order["account_id"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Wallet Address</label>
+                                                <input type="text" name="wallet_address" value="<?=$order["wallet"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Package</label>
+                                                <input type="text" name="package" value="<?=$order["package"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Total Amount</label>
+                                                <input type="text" name="amount" value="<?=$order["total"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <button name="update_withdrawal" class="btn btn-danger">Delete</button>
+                                            </div>
+                                        </div>
+                                </form>
+                            
+                            <?php 
+                                }
+                            }else{
+                                ?>
+                                <h4>No record found!</h4>
+                                <?php
+                             }
+                            }
+                            ?>
                             </div>
                         </div>
                     </div>

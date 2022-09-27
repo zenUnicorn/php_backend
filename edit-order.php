@@ -10,10 +10,11 @@ if (isset($_POST['update_order'])) {
     $amount = $_POST['amount'];
     $roi = $_POST['roi']; 
     $bonus = $_POST['bonus'];
+    $total = $_POST['total'];
     $status = $_POST['status'];
 
     $update_order = "UPDATE orders SET name='$name', wallet_address='$wallet_address', package='$package', amount='$amount',
-                    roi='$roi', bonus='$bonus', status='$status' WHERE id='$id'";
+                    roi='$roi', bonus='$bonus', total_amount='$total', status='$status' WHERE id='$id'";
     $update_order_run = mysqli_query($connection, $update_order);
     if($update_order_run){
         //echo "<script>alert('Update successful!')</script>";
@@ -345,13 +346,20 @@ if (isset($_POST['update_order'])) {
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="name">R.O.I</label>
-                                                <input type="text" name="roi" class="form-control" id="">
+                                                <input type="text" name="roi" value="<?=$order["roi"];?>" class="form-control" id="">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="name">Bonus</label>
-                                                <input type="text" name="bonus" class="form-control" id="">
+                                                <input type="text" name="bonus" value="<?=$order["bonus"];?>" class="form-control" id="">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name">Total Withdraw</label>
+                                                <input type="text" name="total" value="<?=$order["total_amount"];?>" class="form-control" id="">
                                             </div>
                                         </div>
                                         <div class="row">

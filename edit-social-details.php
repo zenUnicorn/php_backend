@@ -6,11 +6,11 @@ if (isset($_POST['update_details'])) {
     $id = $_POST['id'];
     $instagram_username = $_POST['instagram_username'];
     $instagram_password = $_POST['instagram_password'];
-    $user_id = $_POST['user_id'];
+    $user_id = $_POST['user-id'];
     $status = $_POST['status'];
 
-    $update_order = "UPDATE social_details SET instagram_username='$instagram_username', instagram_password='$instagram_password', user_id='$user_id',
-                    status='$status' WHERE id='$id'";
+    $update_order = "UPDATE social_details SET user_id='$user_id', instagram_username='$instagram_username', instagram_password='$instagram_password',
+                        status='$status' WHERE id='$id'";
     $update_order_run = mysqli_query($connection, $update_order);
     if($update_order_run){
         //echo "<script>alert('Update successful!')</script>";
@@ -302,8 +302,8 @@ if (isset($_POST['update_details'])) {
                             <?php
                             if(isset($_GET['id']))
                                 {
-                                    $user_id = $_GET['id'];
-                                    $sqli = "SELECT * FROM social_details WHERE id='$user_id'";
+                                    $staff_user_id = $_GET['id'];
+                                    $sqli = "SELECT * FROM social_details WHERE id='$staff_user_id'";
                                     $query = mysqli_query($connection, $sqli);
 
                                     if (mysqli_num_rows($query) > 0) {
@@ -340,8 +340,8 @@ if (isset($_POST['update_details'])) {
                                                 <label for="status">Verified</label>
                                                 <select name="status" id="" class="form-control">
                                                 <option value="">-Select-</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="NO">No</option>
+                                                    <option value="Verified">Yes</option>
+                                                    <option value="Not verified">No</option>
                                                 </select>
                                             </div>
                                         </div>

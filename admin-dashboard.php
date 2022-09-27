@@ -271,6 +271,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                               <a href="all-withdrawal.php"> <h6 class="text-white">All withdrawals</h6></a>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Column -->
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">
@@ -438,6 +446,32 @@
                                 <div class="col-md-6 border-left text-center pt-2">
                                     <h3 class="mb-0 fw-bold"><?php echo $wallet_total; ?></h3>
                                     <span class="text-muted">All wallets</span>
+                                </div>
+                                <?php 
+                                    } else {
+                                    echo "Null";
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mt-0">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="peity_bar_good left text-center mt-2"><span></span>
+                                        <h6></h6>
+                                    </div>
+                                </div>
+                                <?php 
+                                    $all_wallet_withdrawal = "SELECT * FROM withdrawal_table";
+                                    $all_wallet_withdrawal_run = mysqli_query($connection, $all_wallet_withdrawal);
+
+                                    if ($withdraw_total = mysqli_num_rows($all_wallet_withdrawal_run)) {
+                                    ?>
+                                <div class="col-md-6 border-left text-center pt-2">
+                                    <h3 class="mb-0 fw-bold"><?php echo $withdraw_total; ?></h3>
+                                    <span class="text-muted">All withdrawals</span>
                                 </div>
                                 <?php 
                                     } else {
