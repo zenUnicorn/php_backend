@@ -252,7 +252,7 @@
                                         <?php
                                             $user_id = $_SESSION['id'];
 
-                                            $sqly = "SELECT * FROM social_details  WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
+                                            $sqly = "SELECT * FROM social_details WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
                                             $resulty = $connection->query($sqly);
 
                                             if ($resulty->num_rows > 0) {
@@ -270,7 +270,7 @@
                                                         </div>
                                                     </div>
                                                     <a href="javascript:void(0)" data-toggle="modal" data-target="#add-new-event" style="color: #fff;" class="btn mt-3 btn-danger d-block waves-effect waves-light">
-                                                        <i class=""></i>Verified: <b><?php echo $row["status"] ?></b>
+                                                        <i class=""></i>Verification status: <b><?php echo $row["status"] ?></b>
                                                     </a>
                                                     <a href="staff-task.php" data-toggle="modal" data-target="#add-new-event" class="btn mt-3 btn-info d-block waves-effect waves-light">
                                                         <i class="ti-plus"></i> Add New task

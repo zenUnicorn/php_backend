@@ -1,9 +1,36 @@
 <?php include("connections/session.php"); ?>
 <?php include("connections/database.php"); ?>
 
+<?php
+
+// add package
+$user_id_id = $_SESSION['id'];
+if (isset($_POST['withdraw'])) { 
+    $user_id = $user_id_id;
+    $account_id = $_POST['account_id'];
+    $package = $_POST['package'];
+    $roi = $_POST['roi'];
+    $bonus = $_POST['bonus'];
+    $total_amount = $_POST['total_amount'];
+    $amount = $_POST['amount'];
+    $wallet_address = $_POST['wallet_address'];
+
+    $sql = "INSERT INTO withdrawal_table (account_id, user_id, package, roi, bonus, total, amount, wallet) 
+                VALUES('{$account_id}', '{$user_id}', '{$package}', '{$roi}', '{$bonus}', '${total_amount}', '{$amount}', '{$wallet_address}')";
+    $result = mysqli_query($connection, $sql);
+    if ($result) {
+        header('location: withdrawal-page.php');
+    } else {
+        header('location: withdrawal.php');
+    }
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +39,7 @@
     <meta name="keywords">
     <meta name="description">
     <meta name="robots" content="noindex,nofollow">
-    <title>Environ Platform | User Dashboard</title>
+    <title>Environ Platform | User package</title>
     <!-- Favicon icon -->
     <link rel="shortcut icon" href="wp-content/themes/creptaam/images/logo-icon.png" type="image/x-icon">
     <!-- Custom CSS -->
@@ -20,7 +47,7 @@
     <link href="assets/extra-libs/calendar/calendar.css" rel="stylesheet" />
     <link href="dist/css/style.min.css" rel="stylesheet">
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-
+    <![endif]-->
 </head>
 
 <body>
@@ -217,7 +244,7 @@
                         <div class="card card-hover">
                             <div class="box bg-warning text-center">
                                 <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
-                                <a href="referrals.php"><h6 class="text-white">Referrals (coming soon!)</h6></a>
+                                <a href="referrals.php"></a><h6 class="text-white">Referrals (coming soon!)</h6></a>
                             </div>
                         </div>
                     </div>
@@ -231,150 +258,108 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                        <h5 class="card-title"></h5>
-                        <div class="card">
-                            <div class="">
-                                <div class="row">
-                                    <div class="col-lg-3 border-right pe-0">
-                                        <div class="card-body border-bottom">
-                                            <h4 class="card-title mt-2">Timeline</h4>
-                                        </div>
-                                        <?php
+
+                 <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card"> <br>
+                            <form class="form-horizontal" method="POST" action="#">
+                                <div class="card-body">
+                                <?php 
+                                $ri = "SELECT * FROM orders";
+                                $rii = $connection->query($ri);
+
+
+                                
+                                ?>
+                                <?php
                                             $user_id = $_SESSION['id'];
 
                                             $sqly = "SELECT * FROM orders  WHERE user_id = $user_id ORDER BY id DESC LIMIT 1";
                                             $resulty = $connection->query($sqly);
 
+
                                             if ($resulty->num_rows > 0) {
                                                 // output data of each row
 
                                             ?>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                <?php while ($row = $resulty->fetch_assoc()) {  ?>
-                                                    <p>Status: <?php echo $row["status"] ?></p>
-                                                    <a href="javascript:void(0)" data-toggle="modal"
-                                                        data-target="#add-new-event"
-                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <h3><?php echo $row["amount"] ?></h3>
-                                                        <i class=""></i>Investment
-                                                    </a>
-                                                    <a href="javascript:void(0)" data-toggle="modal"
-                                                        data-target="#add-new-event"
-                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <h3><?php echo $row["roi"] ?></h3>
-                                                        <i class=""></i>R.O.I
-                                                    </a>
-                                                    <a href="javascript:void(0)" data-toggle="modal"
-                                                        data-target="#add-new-event"
-                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <h3><?php echo $row["bonus"] ?></h3>
-                                                        <i class="ti-plus"></i>     Mining Bonus
-                                                    </a>
-                                                    <a href="javascript:void(0)" data-toggle="modal"
-                                                        data-target="#add-new-event"
-                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <h3><?php echo $row["billing_days"] ?></h3>
-                                                        <i class=""></i> Billing days
-                                                    </a>
-                                                    <a href="withdrawal.php" data-toggle="modal"
-                                                        data-target="#add-new-event"
-                                                        class="btn mt-3 btn-info d-block waves-effect waves-light">
-                                                        <h3>Withdraw</h3>
-                                                        <i class=""></i> investment
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <?php
+                                            <?php while ($row = $resulty->fetch_assoc()) {  ?>
+                                    <h2>Withdraw assets</h2> 
+                                    <h4 class="card-title"></h4>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Account ID
+                                            </label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" id="lname"
+                                            name="account_id" value="EVP20220<?php echo $_SESSION['id']; ?>" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Package
+                                            </label>
+                                        <div class="col-sm-9"> 
+                                            <input type="text" class="form-control" id="lname"
+                                            name="package" value="<?php echo $row["package"] ?>" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">R.O.I
+                                            </label>
+                                        <div class="col-sm-9"> 
+                                            <input type="text" class="form-control" id="lname"
+                                            name="roi" value="<?php echo $row["roi"] ?>" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Bonus
+                                            </label>
+                                        <div class="col-sm-9"> 
+                                            <input type="text" class="form-control" id="lname"
+                                            name="bonus" value="<?php echo $row["bonus"] ?>" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname" class="col-sm-3 text-end control-label col-form-label">Total withdrawable
+                                            </label>
+                                        <div class="col-sm-9"> 
+                                            <input type="text" class="form-control" id="lname"
+                                            name="total_amount" value="<?php echo $row["total_amount"] ?>" >
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="lname"
+                                            class="col-sm-3 text-end control-label col-form-label">Amount</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" placeholder="Enter amount to withdraw" name="amount" value="" class="form-control" id="lname">
+                                        </div>
+                                    </div>  
+
+                                    <div class="form-group row">
+                                        <label for="lname"
+                                            class="col-sm-3 text-end control-label col-form-label">Crypto Address</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" placeholder="Enter your wallet address" name="wallet_address" value="" class="form-control" id="lname">
+                                        </div>
+                                    </div>  
+                                <div class="border-top">
+                                    <div class="card-body">
+                                        <button type="submit" name="withdraw"  class="btn btn-primary">Withdraw</button>
+                                    </div>
+                                </div>
+                                <?php
                                                 }
                                                     } else {
                                                     echo "No Recent Orders";
                                                 }
                                         ?>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    </div>
-                <?php
-                        $user_id = $_SESSION['id'];
-
-                        //$sqli = "SELECT * FROM orders WHERE user_id = $user_id LIMIT 2";
-                        $sqli = "SELECT * FROM orders  WHERE user_id = $user_id ORDER BY id DESC LIMIT 2";
-                        $resulti = $connection->query($sqli);
-
-                        if ($resulti->num_rows > 0) {
-                            // output data of each row
-
-                ?>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-0">Recent activities</h5>
-                            </div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Account ID</th>
-                                        <th scope="col">Billing Days</th>
-                                        <th scope="col">Package</th>
-                                        <th scope="col">Time</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                            <?php while ($row = $resulti->fetch_assoc()) {  ?>
-                                        <th scope="row"><?php echo $row["account_id"] ?></th>
-                                        <td><?php echo $row["billing_days"] ?></td>
-                                        <td><?php echo $row["package"] ?></td>
-                                        <td><?php echo $row["order_time"] ?></td>
-                                    </tr>
-                            <?php
-                                }
-                                    } else {
-                                        echo "No Recent Orders";
-                                    }
-                            ?>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="col-md-6">
                     </div>
                 </div>
-
-
-
-                </div>
-                <!-- BEGIN MODAL -->
-                <div class="modal none-border" id="my-event">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title"><strong>Add Event</strong></h4>
-                                <button type="button" class="close" data-dismiss="modal"
-                                    aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body"></div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary waves-effect"
-                                    data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-success save-event waves-effect waves-light">Create
-                                    event</button>
-                                <button type="button" class="btn btn-danger delete-event waves-effect waves-light"
-                                    data-dismiss="modal">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!-- Modal Add Category -->
                 <div class="modal fade none-border" id="add-new-event">
                     <div class="modal-dialog">

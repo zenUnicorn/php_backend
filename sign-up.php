@@ -3,6 +3,13 @@
 
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+$output = "";
+
+
+
 // Sign up authentication
 
 if (isset($_POST['register_button'])) {
@@ -16,6 +23,21 @@ if (isset($_POST['register_button'])) {
         header('location: sign-in.php');
     } else {
         header('location: sign-up.php');
+    }
+    require 'vendor/autoload.php';
+    $mail = new PHPMailer(true);
+    try {
+        $mail->setFrom("iamholumeedey007@gmail.com", "User registration");
+        $mail->addAddress("iamholumeedey007@gmail.com");
+
+        $mail->isHTML(true);
+        $mail->Subject = "Welcome onboard";
+        $mail->Body = "Hello" . $fullname . "thank you for signing up on Environplatform, 
+                        we are so happy to have you signing up and investing with us.";
+        $mail->send();
+        echo "Message sent";
+    } catch (Exception $e) {
+        echo "Message not sent", $mail->ErrorInfo;
     }
 }
 ?>
