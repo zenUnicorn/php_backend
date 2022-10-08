@@ -317,6 +317,7 @@ if (isset($_POST['order'])) {
                                         <option value="Deluxe Plan">Deluxe Plan</option>
                                         <option value="Super Deluxe Plan">Super Deluxe Plan</option>
                                         <option value="Executive Plan">Executive Plan</option>
+                                        <option value="Elite Plan">Elite Plan</option>
                                     </select>
                                         </div>
                                     </div>
@@ -331,6 +332,7 @@ if (isset($_POST['order'])) {
                                         <option value="$1,000">$1,000</option>
                                         <option value="$3,500">$3,500</option>
                                         <option value="$7,500">$7,500</option>
+                                        <option value="$100,000">$100,000</option>
                                     </select>
                                         </div>
                                     </div>
@@ -345,6 +347,7 @@ if (isset($_POST['order'])) {
                                             <option value="14">14 days</option>
                                             <option value="28">28 days</option>
                                             <option value="41">41 days</option>
+                                            <option value="90">90 days</option>
                                         </select>
                                         </div>
                                     </div>
