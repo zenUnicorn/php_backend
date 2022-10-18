@@ -1,0 +1,43 @@
+.btc-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.btc-container {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.btc-container .coin-price {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #ccc;
+    margin: 7px;
+}
+
+.btc-container .coin-price .logo {
+    width: 70px;
+    margin-right: 10px;
+}
+
+.btc-container .coin-price .logo img {
+    width: 100%;
+}
+
+.btc-container .coin-price div {
+    display: block;
+}
+
+.btc-container .coin-price div h1 {
+    font-size: 20px;
+    color: #fff;
+}
