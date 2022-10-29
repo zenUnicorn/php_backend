@@ -270,6 +270,9 @@
                                <a href="all-wallets.php"><h6 class="text-white">All wallets</h6> </a>
                             </div>
                         </div>
+
+
+                        
                     </div>
                     <div class="col-md-6 col-lg-3">
                         <div class="card card-hover">

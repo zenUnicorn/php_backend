@@ -20,24 +20,28 @@ if (isset($_POST['register_button'])) {
     $sql = "INSERT INTO users_table (full_name, email_address, user_password) VALUES('{$fullname}', '{$email}','{$password}')";
     $result = mysqli_query($connection, $sql);
     if ($result) {
+        
+        $message = "Hello ".$fullname. "\r\n" . 
+            "Welcome to Environ Platform, we are thrilled to see you here!". "\r\n" .
+            
+            "We are confident that our service will help you make earn some cryptocurrency with our cutting-edge cloud mining technology.". "\r\n" .
+            
+            
+            "Regards". "\r\n" .
+            "Environ Platform Team.";
+     
+        $from = "support@environplatform.io";
+
+        //change your email here
+        $to = $email;
+        $subject = "Welcome to Environplatform";
+        $headers = "From: ". $from;
+    
+        mail($to, $subject, $message, $headers);
+    
         header('location: sign-in.php');
     } else {
         header('location: sign-up.php');
-    }
-    require 'vendor/autoload.php';
-    $mail = new PHPMailer(true);
-    try {
-        $mail->setFrom("iamholumeedey007@gmail.com", "User registration");
-        $mail->addAddress("iamholumeedey007@gmail.com");
-
-        $mail->isHTML(true);
-        $mail->Subject = "Welcome onboard";
-        $mail->Body = "Hello" . $fullname . "thank you for signing up on Environplatform, 
-                        we are so happy to have you signing up and investing with us.";
-        $mail->send();
-        echo "Message sent";
-    } catch (Exception $e) {
-        echo "Message not sent", $mail->ErrorInfo;
     }
 }
 ?>
