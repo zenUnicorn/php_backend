@@ -6,20 +6,31 @@ $echo "Thanks for checking";
 ```
 
 ## Features
-|                |Features                       |
-|----------------|-------------------------------|-----------------------------|
-|Users           | - Sign-in/Sign-up             |
-                 | - Profile                     |
-                 | - Update Profile              |
-|Staffs          |`"Isn't this fun?"`            |"Isn't this fun?"            |
-|Admin           |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
 
-- Authentication
+#### Homepage
 - Live crypto update
+- FAQ
+- ALl pages
+-
+
+#### Users
+- Sign-in/Sign-up   
+- Profile
+- Update Profile 
+- Update password
 - Welcome email
+
+
+#### Staffs
+- Sign-in/Sign-up   
+- Profile
+- Update Profile 
+- Update password
+- Welcome email
+
+
+#### Admin
 - Add wallet
-- Add mode of payment
-- 
 
 
 Happy coding!!! 👋❤
