@@ -6,9 +6,11 @@ $echo "Thanks for checking";
 ```
 
 ## Features
-|                |Features                        |HTML                         |
+|                |Features                       |
 |----------------|-------------------------------|-----------------------------|
-|Users           |`'Isn't this fun?'`            |'Isn't this fun?'            |
+|Users           | - Sign-in/Sign-up             |
+                 | - Profile                     |
+                 | - Update Profile              |
 |Staffs          |`"Isn't this fun?"`            |"Isn't this fun?"            |
 |Admin           |`-- is en-dash, --- is em-dash`|-- is en-dash, --- is em-dash|
 
