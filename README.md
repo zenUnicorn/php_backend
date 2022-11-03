@@ -11,14 +11,20 @@ $echo "Thanks for checking";
 - Live crypto update
 - FAQ
 - ALl pages
--
+- 
 
 #### Users
 - Sign-in/Sign-up   
 - Profile
 - Update Profile 
-- Update password
+- Update password/forget password
 - Welcome email
+- Order package
+- Invoice
+- Order details
+- Recent transactions 
+- Account number
+- Logout
 
 
 #### Staffs
