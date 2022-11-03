@@ -10,8 +10,7 @@ $echo "Thanks for checking";
 #### Homepage
 - Live crypto update
 - FAQ
-- ALl pages
-- 
+- All pages
 
 #### Users
 - Sign-in/Sign-up   
@@ -32,11 +31,22 @@ $echo "Thanks for checking";
 - Profile
 - Update Profile 
 - Update password
-- Welcome email
+- Tasks  - Submit tasks
+- Verify socials
 
 
 #### Admin
+- View all users
+- View all orders
+- View all staffs
+- View social details
+- Edit orders
+- Update orders
+- Update profiles
 - Add wallet
+- Delete users
+- Delete orders
+- Delete staffs
 
 
 Happy coding!!! 👋❤
