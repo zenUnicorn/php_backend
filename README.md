@@ -47,7 +47,6 @@ $echo "Thanks for checking";
 - Delete users
 - Delete orders
 - Delete staffs
-- 
 
 
 Happy coding!!! 👋❤
