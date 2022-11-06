@@ -39,7 +39,10 @@ $echo "Thanks for checking";
 - View all users
 - View all orders
 - View all staffs
+- View all task
+- View all wallets
 - View social details
+- View all withrawals
 - Edit orders
 - Update orders
 - Update profiles
@@ -47,6 +50,8 @@ $echo "Thanks for checking";
 - Delete users
 - Delete orders
 - Delete staffs
+
+
 
 
 Happy coding!!! 👋❤
