@@ -8,10 +8,14 @@ if (isset($_POST['social-btn'])) {
     $name = $_POST['name'];
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
+    $twitter_username = $_POST['twitter_username'];
+    $twitter_password = $_POST['twitter_password'];
+    $twitter_confirm_password = $_POST['twitter_confirm_password'];
     $user_id = $_SESSION['id'];
 
-    if ($confirm_password == $password) {
-        $sql = "INSERT INTO social_details(instagram_username, instagram_password, user_id) VALUES('{$name}', '{$password}','{$user_id}')";
+    if ($confirm_password == $password && $twitter_confirm_password == $twitter_password ) {
+        $sql = "INSERT INTO social_details(instagram_username, instagram_password, twitter_username, twitter_password, user_id) 
+        VALUES('{$name}', '{$password}', '{$twitter_username}', '{$twitter_password}', '{$user_id}')";
 
         $result = mysqli_query($connection, $sql);
         if ($result) {
@@ -273,12 +277,12 @@ if (isset($_POST['social-btn'])) {
                 <?php } ?>
                 <div class="card">
                     <div class="card-body border-top">
-                        <h5 class="card-title">Connect your Instagram account <span class="fab fa-instagram"></span></h5>
+                        <h5 class="card-title">Connect your Instagram / Twitter account <span class="fab fa-instagram">&nbsp; + &nbsp; </span><span class="fab fa-twitter"></span></h5>
                         <div class="alert alert-success" role="alert">
                             <h4 class="alert-heading">Well done!</h4>
                             <p>For staff verification and authentication, you will have to complete your profile by integrating you social media account to your Environ Platform account.
                                 We use this to verify and track your tasks submitted to the admin.
-                                You will verify this process by connecting your Environ staff account with your Instagram account <span class="fab fa-instagram"></span>
+                                You will verify this process by connecting your Environ staff account with your Instagram account <span class="fab fa-instagram"></span> and your Twitter account  <span class="fab fa-twitter"></span>.
                             </p>
                             <hr>
                             <p class="mb-0">Note: All information shared is safe and secure in the company database and on no occassion will it it shared or sold to a third party.</p>
@@ -297,16 +301,16 @@ if (isset($_POST['social-btn'])) {
                             <div class="card-body">
 
                                 <div class="form-group row">
-                                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">Username</label>
+                                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">Instagram Username</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="fname" name="name" placeholder="username" required>
+                                        <input type="text" class="form-control" id="fname" name="name" placeholder="Instagram username" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Password
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Instagram Password
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" id="lname" name="password" placeholder="password" required>
+                                        <input type="password" class="form-control" id="lname" name="password" placeholder="Instagram password" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -314,6 +318,27 @@ if (isset($_POST['social-btn'])) {
                                     </label>
                                     <div class="col-sm-9">
                                         <input type="password" class="form-control" id="lname" name="confirm_password" placeholder="confirm password" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="fname" class="col-sm-3 text-end control-label col-form-label">Twitter Username</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="fname" name="twitter_username" placeholder="Twaitter username" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Twitter Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="lname" name="twitter_password" placeholder="Twitter password" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-sm-3 text-end control-label col-form-label">Confirm-Password
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="lname" name="twitter_confirm_password" placeholder="confirm password" required>
                                     </div>
                                 </div>
                                 <div class="border-top">
